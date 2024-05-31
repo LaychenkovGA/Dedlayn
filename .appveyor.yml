@@ -1,0 +1,19 @@
+image: Ubuntu  # образ для сборки
+
+stack: jdk 11  # версия JDK
+
+branches:
+  only:
+    - main  # ветка git
+
+build: off  # будем использовать свой скрипт сборки
+
+install:
+  # запускаем SUT (& означает, что в фоновом режиме не блокируем терминал для запуска тестов)
+  #  - java -jar ./artifacts/app-deadline.jar -P:profile=ru.netology.test &
+  - docker-compose up -d
+  - sleep 30
+  - java -jar ./artifacts/app-deadline.jar &
+  - chmod +x gradlew
+build_script:
+  - ./gradlew ru.netology.test --info -Dselenide.headless=true

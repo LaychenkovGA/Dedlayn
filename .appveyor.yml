@@ -13,7 +13,7 @@ install:
   #  - java -jar ./artifacts/app-deadline.jar -P:profile=ru.netology.test &
   - docker-compose up -d
   - sleep 30
-  - java -jar ./artifacts/app-deadline.jar &
+  - java -jar ./artifacts/app-deadline.jar -P:jdbc.url=jdbc:mysql://localhost:3306/db &
   - chmod +x gradlew
 build_script:
   - ./gradlew ru.netology.test --info -Dselenide.headless=true

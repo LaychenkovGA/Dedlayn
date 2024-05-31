@@ -10,7 +10,10 @@ build: off  # будем использовать свой скрипт сбор
 
 install:
   # запускаем SUT (& означает, что в фоновом режиме не блокируем терминал для запуска тестов)
-  - docker-compose up -d
+  #  - java -jar ./artifacts/app-deadline.jar -P:profile=ru.netology.test &
+  - Container start
+  - docker-compose up &
+  - Waiting for сontainer start
   - sleep 30
   - java -jar ./artifacts/app-deadline.jar -P:jdbc.url=jdbc:mysql://localhost:3306/db &
   - chmod +x gradlew
